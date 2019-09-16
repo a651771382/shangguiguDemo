@@ -5,6 +5,9 @@ import org.apache.hadoop.hbase.Cell;
 import org.apache.hadoop.hbase.CellUtil;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
+import org.apache.hadoop.hbase.filter.CompareFilter;
+import org.apache.hadoop.hbase.filter.RowFilter;
+import org.apache.hadoop.hbase.filter.SubstringComparator;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
@@ -132,6 +135,108 @@ public class HBaseDao {
         //关闭资源
         relaTable.close();
         connTable.close();
+        connection.close();
+    }
+
+    //取关
+    public static void deleteAttends(String uid, String... dels) throws IOException {
+        //获取connection对象
+        Connection connection = ConnectionFactory.createConnection(Constants.CONFIGURATION);
+        //操作用户关系表
+        //获取用户关系表对象
+        Table relaTable = connection.getTable(TableName.valueOf(Constants.RELATION_TABLE));
+        //创建一个集合，用于存放用户关系表的delete对象
+        ArrayList<Delete> relaDeletes = new ArrayList<Delete>();
+        //创建操作者的delete对象
+        Delete uidDelete = new Delete(Bytes.toBytes(uid));
+        //循环创建被取关者的delete对象
+        for (String del : dels) {
+            //给操作者的delete对象赋值
+            uidDelete.addColumns(Bytes.toBytes(Constants.RELATION_TABLE_CF1), Bytes.toBytes(del));
+            //创建被取关者的delete对象
+            Delete delDelete = new Delete(Bytes.toBytes(del));
+            //被取关者的delete对象赋值
+            delDelete.addColumns(Bytes.toBytes(Constants.RELATION_TABLE_CF2), Bytes.toBytes(uid));
+            //将被取关者的delete对象添加至集合
+            relaDeletes.add(delDelete);
+        }
+        //将操作者的delete对象添加至集合
+        relaDeletes.add(uidDelete);
+        //执行用户关系表的删除操作
+        relaTable.delete(relaDeletes);
+        //操作用户收件箱表
+        //获取收件箱表对象
+        Table inboxTable = connection.getTable(TableName.valueOf(Constants.INBOX_TABLE));
+        //创建操作者的delete对象
+        Delete inboxDelete = new Delete(Bytes.toBytes(uid));
+        //给操作者的delete对象赋值
+        for (String del : dels) {
+            inboxDelete.addColumns(Bytes.toBytes(Constants.INBOX_TABLE_CF), Bytes.toBytes(del));
+        }
+        //执行收件箱表的删除操作
+        inboxTable.delete(inboxDelete);
+        //关闭资源
+        relaTable.close();
+        inboxTable.close();
+        connection.close();
+    }
+
+    //获取用户的初始化页面
+    public static void getInit(String uid) throws IOException {
+        //获取connection对象
+        Connection connection = ConnectionFactory.createConnection(Constants.CONFIGURATION);
+        //获取收件箱表对象
+        Table inboxTable = connection.getTable(TableName.valueOf(Constants.INBOX_TABLE));
+        //获取微博内容表对象
+        Table contTable = connection.getTable(TableName.valueOf(Constants.CONTENT_TABLE));
+        //创建收件箱表Get对象，并获取数据(设置最大版本)
+        Get inboxGet = new Get(Bytes.toBytes(uid));
+        inboxGet.setMaxVersions();
+        Result result = inboxTable.get(inboxGet);
+        //遍历获取对象
+        for (Cell cell : result.rawCells()) {
+            //构建微博内容表Get对象
+            Get contGet = new Get(CellUtil.cloneValue(cell));
+            //获取该Get对象的数据内容
+            Result contResult = contTable.get(contGet);
+            //解析内容并打印
+            for (Cell contCell : contResult.rawCells()) {
+                System.out.println("RK:" + Bytes.toString(CellUtil.cloneRow(contCell)) +
+                        ",CF" + Bytes.toString(CellUtil.cloneFamily(contCell)) +
+                        ",CN" + Bytes.toString(CellUtil.cloneQualifier(contCell)) +
+                        ",Value" + Bytes.toString(CellUtil.cloneValue(contCell)));
+            }
+        }
+        //关闭资源
+        inboxTable.close();
+        contTable.close();
+        connection.close();
+    }
+
+    //获取某个人的所有微博详情
+    public static void getWeiBo(String uid) throws IOException {
+        //获取connection对象
+        Connection connection = ConnectionFactory.createConnection(Constants.CONFIGURATION);
+        //获取内容表对象
+        Table contTable = connection.getTable(TableName.valueOf(Constants.CONTENT_TABLE));
+        //构建Scan对象
+        Scan scan = new Scan();
+        //构建过滤器
+        RowFilter rowFilter = new RowFilter(CompareFilter.CompareOp.EQUAL, new SubstringComparator(uid + "_"));
+        scan.setFilter(rowFilter);
+        //获取数据
+        ResultScanner scanner = contTable.getScanner(scan);
+        //解析数据并打印
+        for (Result result : scanner) {
+            for (Cell cell : result.rawCells()) {
+                System.out.println("RK:" + Bytes.toString(CellUtil.cloneRow(cell)) +
+                        ",CF" + Bytes.toString(CellUtil.cloneFamily(cell)) +
+                        ",CN" + Bytes.toString(CellUtil.cloneQualifier(cell)) +
+                        ",Value" + Bytes.toString(CellUtil.cloneValue(cell)));
+            }
+        }
+        //关闭资源
+        contTable.close();
         connection.close();
     }
 }
