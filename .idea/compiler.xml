@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="flink_demo" />
+        <module name="guliweibo" />
+        <module name="hbase_demo" />
+        <module name="HotltemsAnalysis" />
+        <module name="kafka_demo" />
+        <module name="kylin" />
+        <module name="odps_test" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="flink_demo" target="1.5" />
+      <module name="guliweibo" target="1.5" />
+      <module name="hbase_demo" target="1.5" />
+      <module name="HotltemsAnalysis" target="1.5" />
+      <module name="kafka_api" target="1.5" />
+      <module name="kafka_demo" target="1.5" />
+      <module name="kylin" target="1.5" />
+      <module name="odps_test" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

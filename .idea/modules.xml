@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/HotltemsAnalysis/HotltemsAnalysis.iml" filepath="$PROJECT_DIR$/HotltemsAnalysis/HotltemsAnalysis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink_demo/flink_demo.iml" filepath="$PROJECT_DIR$/flink_demo/flink_demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/guliweibo/guliweibo.iml" filepath="$PROJECT_DIR$/guliweibo/guliweibo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hbase_demo/hbase_demo.iml" filepath="$PROJECT_DIR$/hbase_demo/hbase_demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kafka_api.iml" filepath="$PROJECT_DIR$/kafka_api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kafka_demo/kafka_demo.iml" filepath="$PROJECT_DIR$/kafka_demo/kafka_demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kylin/kylin.iml" filepath="$PROJECT_DIR$/kylin/kylin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/odps_test/odps_test.iml" filepath="$PROJECT_DIR$/odps_test/odps_test.iml" />
+    </modules>
+  </component>
+</project>

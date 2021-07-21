@@ -12,6 +12,10 @@
         <module>kafka_demo</module>
         <module>hbase_demo</module>
         <module>guliweibo</module>
+        <module>flink_demo</module>
+        <module>HotltemsAnalysis</module>
+        <module>kylin</module>
+        <module>odps_test</module>
     </modules>
 
     <dependencies>

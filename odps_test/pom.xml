@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>kafka_api</artifactId>
+        <groupId>com.lym</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>odps_test</artifactId>
+    <dependencies>
+        <!--    datahub sdk 操作依赖包-->
+        <dependency>
+            <groupId>com.aliyun.datahub</groupId>
+            <artifactId>aliyun-sdk-datahub</artifactId>
+            <version>2.15.0-public</version>
+        </dependency>
+        <!--    maxcompute sdk 操作依赖包-->
+        <!--    	MaxCompute的基础功能，例如对表、Project的操作，以及Tunnel均在此包中。-->
+        <dependency>
+            <groupId>com.aliyun.odps</groupId>
+            <artifactId>odps-sdk-core</artifactId>
+            <version>0.33.7-public</version>
+        </dependency>
+        <!--	一些Util封装-->
+        <dependency>
+            <groupId>com.aliyun.odps</groupId>
+            <artifactId>odps-sdk-commons</artifactId>
+            <version>0.33.7-public</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
