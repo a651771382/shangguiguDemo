@@ -16,6 +16,7 @@
         <module>HotltemsAnalysis</module>
         <module>kylin</module>
         <module>odps_test</module>
+        <module>scala</module>
     </modules>
 
     <dependencies>

@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/kafka_demo/kafka_demo.iml" filepath="$PROJECT_DIR$/kafka_demo/kafka_demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/kylin/kylin.iml" filepath="$PROJECT_DIR$/kylin/kylin.iml" />
       <module fileurl="file://$PROJECT_DIR$/odps_test/odps_test.iml" filepath="$PROJECT_DIR$/odps_test/odps_test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scala/scala.iml" filepath="$PROJECT_DIR$/scala/scala.iml" />
     </modules>
   </component>
 </project>
