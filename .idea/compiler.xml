@@ -25,7 +25,7 @@
       <module name="kafka_demo" target="1.5" />
       <module name="kylin" target="1.5" />
       <module name="odps_test" target="1.5" />
-      <module name="scala" target="1.5" />
+      <module name="scala" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
